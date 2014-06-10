@@ -61,19 +61,18 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 //    update post information. Call to blogService.update()
 
     $scope.change = function(task) {
-        debugger;
         $scope.updateTaskState(task);
     };
 
 
     $scope.updateTaskState = function(task) {
 
-        var taskToUdapte = {
-            id : task.id,
-            finish : task.finish
-        };
+//        var taskToUdapte = {
+//            id : task.id,
+//            finish : task.finish
+//        };
 
-        taskService.updateTaskState(taskToUdapte)
+        taskService.updateTaskState(task)
             .success(function (current, status, headers, config) {
                 $location.path("/posts/"+$scope.current.id);
                 toaster.pop('success', "Post updated successfully!");

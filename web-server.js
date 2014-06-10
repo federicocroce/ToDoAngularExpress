@@ -73,7 +73,7 @@ app.put('/newTask', function(req, res) {
 app.post('/editTask', function(req, res) {
     selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
         var taskIndex = myTasks.indexOf(selTask);
-        myTasks[taskIndex].finish = req.body.finish;
+        myTasks[taskIndex].finish = !req.body.finish;
         res.json(true);
 });
 
