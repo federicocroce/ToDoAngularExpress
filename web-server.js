@@ -59,12 +59,12 @@ app.put('/newTask', function(req, res) {
 // myTasks[postIndex] = req.body;   no entiendo
 // res.json(true);   returna que fue correcto?
 // _ que sentido tiene?
-app.post('/editPost', function(req, res) {
-    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.params.id});
-    var postIndex = myTasks.indexOf(selPost);
-    myTasks[postIndex] = req.body;
-    res.json(true);
-});
+//app.post('/editPost', function(req, res) {
+//    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.params.id});
+//    var postIndex = myTasks.indexOf(selPost);
+//    myTasks[postIndex] = req.body;
+//    res.json(true);
+//});
 
 // delete a particular post
 app.delete('/delete/:id', function(req, res) {
@@ -73,3 +73,11 @@ app.delete('/delete/:id', function(req, res) {
     myPosts.splice(postIndex, 1);
     res.json(true);
 });
+
+
+// delete all
+app.delete('/clearTask', function(req, res) {
+    myTasks = [];
+});
+
+

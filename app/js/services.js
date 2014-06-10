@@ -18,7 +18,11 @@ app.service('taskService', function ($http, $location) {
         //add a new element to array
         this.create = function (taskData) {
             return $http.put('/newTask', taskData);
-        };   
+        };
+
+        this.clear = function () {
+            return $http.delete('/clearTask');
+        };
 //
 //        //update blogItem matching by id
 //        this.update = function (blogItemId, blogItem) {
