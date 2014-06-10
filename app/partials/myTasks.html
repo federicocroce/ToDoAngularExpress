@@ -1,16 +1,35 @@
 <!-- My posts  -->
 
-<h1>Lista de Tareas</h1>
-    <span>{{restantes()}} de {{tareas.length}}</span>
-    <button ng-click="eliminar()">Eliminar</button>
+
+<h2>List of task</h2>
+<div>
+    <span>{{remaining()}} de {{tasks.length}}</span> [ <a class="text-danger" href="" ng-click="deleteFinish()">Delete Select</a>] [ <a class="text-danger" href="" ng-click="deleteAll()">Delete All</a>]
     <ul class="unstyled">
-        <li ng-repeat="tarea in tareas">
-            <input type="checkbox" ng-model="tarea.hecho">
-            <span class="hecho-{{tarea.hecho}}">{{tarea.texto}}</span>
+        <li ng-repeat="task in tasks">
+            <input type="checkbox" ng-model="task.finish">
+            <span class="finish-{{task.finish}}">{{task.name}}</span>
         </li>
     </ul>
-    <form ng-submit="agregarTarea()">
-        <input type="text" size="30" placeholder="Agregar item" ng-model="textoNuevaTarea">
-        <button class="btn btn-primary" type="submit">Agregar</button>
+    <form ng-submit="addTask()">
+        <input class="invaldTask-{{invalidTask}}" type="texto" size="30" placeholder="Add Task" ng-model="newTask" ng-change="newTaskValue()">
+        <button class="btn btn-primary" type="submit">Add</button>
     </form>
-<script src=""></script>
+    <span class="text-danger" ng-show="invalidTask">Invalid task. Add Text.</span>
+</div>
+
+
+        <!---->
+<!--<h1>Lista de Tareas</h1>-->
+    <!--<span>{{restantes()}} de {{tareas.length}}</span>-->
+    <!--<button ng-click="eliminar()">Eliminar</button>-->
+    <!--<ul class="unstyled">-->
+        <!--<li ng-repeat="tarea in tareas">-->
+            <!--<input type="checkbox" ng-model="tarea.hecho">-->
+            <!--<span class="hecho-{{tarea.hecho}}">{{tarea.texto}}</span>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<form ng-submit="agregarTarea()">-->
+        <!--<input type="text" size="30" placeholder="Agregar item" ng-model="textoNuevaTarea">-->
+        <!--<button class="btn btn-primary" type="submit">Agregar</button>-->
+    <!--</form>-->
+<!--<script src=""></script>-->

@@ -3,22 +3,13 @@ var express = require("express"),
 
 var _ = require("underscore");
 
-var myTasks = [{
-    id: 1,
-    texto: 'Nico',
-    hecho: true
-},
-    {
-        id: 2,
-        texto: 'Fede',
-        hecho: false
-    },
-    {
-        id:3,
-        texto: 'hola que tal...',
-        hecho: true
-    }
-];
+var myTasks =  [{
+    name: 'Task1',
+    finish: true
+}, {
+    name: 'Task2',
+    finish: false
+}];
 
 var cont = myTasks.length;
 
@@ -47,18 +38,17 @@ app.get('/api/myTasks', function(req, res){
 });
 
 
-//get a particular Task by ID.   return itemTask.id  est'a bien?
-app.get('/api/myPosts/:id', function(req, res){
-    selTask = _.find(myTasks, function(itemTask){return itemTask.id == req.params.id});
-    res.send (selTask);
-});
+////get a particular Task by ID.   return itemTask.id  est'a bien?
+//app.get('/api/myPosts/:id', function(req, res){
+//    selTask = _.find(myTasks, function(itemTask){return itemTask.id == req.params.id});
+//    res.send (selTask);
+//});
 
 // create a new Task.   Preguntar id, texto hecho.   que hace res.json?
-app.put('/newPost', function(req, res) {
+app.put('/newTask', function(req, res) {
     var newTask = {
-        id : ++cont,
-        texto : req.body.texto,
-        hecho : req.body.hecho
+        name : req.body.name,
+        finish : req.body.finish
     };
     newTask.push(newTask);
     res.json(true);

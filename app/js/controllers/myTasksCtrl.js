@@ -1,12 +1,12 @@
 'use strict';
 
-app.controller('myTasksCtrl', function($scope, blogService) {
+app.controller('myTasksCtrl', function($scope, taskService) {
 
     //get all elements
     $scope.getAll = function() {
-       blogService.getAll()
+        taskService.getAll()
             .success(function (data, status, headers, config) {
-                $scope.tareas = data;
+                $scope.tasks = data;
             })
             .error(function(data, status, headers, config) {
                 //toaster.pop('error', current);
@@ -14,42 +14,42 @@ app.controller('myTasksCtrl', function($scope, blogService) {
     }
 
     // Call to blogService.create()
-    $scope.addPost = function() {
-        var postData = {
-            id : '',
-            title : $scope.titlePost,
-            text : $scope.bodyPost
+    $scope.addTask = function() {
+        debugger;
+        var taskData = {
+            name : $scope.newTask,
+            finish : false
         };
-        blogService.create(postData)
+        taskService.create(taskData)
             .success(function (current, status, headers, config) {
-                $location.path("/posts");
-                toaster.pop('success', "Post saved successfully!");
+                  $location.path("/posts");
+//                toaster.pop('success', "Post saved successfully!");
             })
             .error(function(current, status, headers, config) {
-                toaster.pop('error', current);
+//                toaster.pop('error', current);
             });
     };
 
     //get single post
     $scope.getById = function() {
-        blogService.getById($routeParams.postId)
+        taskService.getById($routeParams.postId)
             .success(function (current, status, headers, config) {
                 $scope.current = current;
             })
             .error(function(current, status, headers, config) {
-                toaster.pop('error', current);
+//                toaster.pop('error', current);
             });
     };
 
     // update post information. Call to blogService.update()
     $scope.updatePost = function() {
-        blogService.update($scope.current.id, $scope.current)
+        taskService.update($scope.current.id, $scope.current)
             .success(function (current, status, headers, config) {
                 $location.path("/posts/"+$scope.current.id);
                 toaster.pop('success', "Post updated successfully!");
             })
             .error(function(current, status, headers, config) {
-                toaster.pop('error', current);
+//                toaster.pop('error', current);
             });
     };
 

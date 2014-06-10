@@ -1,7 +1,7 @@
 'use strict';
 
 /* Services */
-app.service('blogService', function ($http, $location) {
+app.service('taskService', function ($http, $location) {
         
         var urlBase = "/api/myTasks";
     
@@ -10,21 +10,21 @@ app.service('blogService', function ($http, $location) {
            return $http.get('/api/myTasks');
         }
        
-        //search by id in the current array
-        this.getById = function (blogItemId) {  
-            return $http.get('/api/myPosts/'+blogItemId);
-        };
+//        //search by id in the current array
+//        this.getById = function (blogItemId) {
+//            return $http.get('/api/myPosts/'+blogItemId);
+//        };
     
         //add a new element to array
-        this.create = function (postData) {
-            return $http.put('/newPost', postData);
+        this.create = function (taskData) {
+            return $http.put('/newTask', taskData);
         };   
-    
-        //update blogItem matching by id
-        this.update = function (blogItemId, blogItem) {
-            return $http.post('/editPost', blogItem);
-        };
-    
+//
+//        //update blogItem matching by id
+//        this.update = function (blogItemId, blogItem) {
+//            return $http.post('/editPost', blogItem);
+//        };
+//
         //remove blogItem matching by id
         this.remove = function (blogItemId) {
             return $http.delete('/delete/'+blogItemId);
