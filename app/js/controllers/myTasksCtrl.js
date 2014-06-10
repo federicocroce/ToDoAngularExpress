@@ -44,6 +44,9 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     };
 
 
+
+
+
 //    //get single post
 //    $scope.getById = function() {
 //        taskService.getById($routeParams.postId)
@@ -55,17 +58,30 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 //            });
 //    };
 
-    // update post information. Call to blogService.update()
-//    $scope.updatePost = function() {
-//        taskService.update($scope.current.id, $scope.current)
-//            .success(function (current, status, headers, config) {
-//                $location.path("/posts/"+$scope.current.id);
-//                toaster.pop('success', "Post updated successfully!");
-//            })
-//            .error(function(current, status, headers, config) {
-////                toaster.pop('error', current);
-//            });
-//    };
+//    update post information. Call to blogService.update()
+
+    $scope.change = function(task) {
+        debugger;
+        $scope.updateTaskState(task);
+    };
+
+
+    $scope.updateTaskState = function(task) {
+
+        var taskToUdapte = {
+            id : task.id,
+            finish : task.finish
+        };
+
+        taskService.updateTaskState(taskToUdapte)
+            .success(function (current, status, headers, config) {
+                $location.path("/posts/"+$scope.current.id);
+                toaster.pop('success', "Post updated successfully!");
+            })
+            .error(function(current, status, headers, config) {
+//                toaster.pop('error', current);
+            });
+    };
 
     // removePost function
     $scope.removePost = function () {

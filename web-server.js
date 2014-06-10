@@ -4,9 +4,11 @@ var express = require("express"),
 var _ = require("underscore");
 
 var myTasks =  [{
+    id: 0,
     name: 'Task1',
     finish: true
 }, {
+    id: 1,
     name: 'Task2',
     finish: false
 }];
@@ -47,6 +49,7 @@ app.get('/api/myTasks', function(req, res){
 // create a new Task.   Preguntar id, texto hecho.   que hace res.json?
 app.put('/newTask', function(req, res) {
     var newTask = {
+        id: cont ++,
         name : req.body.name,
         finish : req.body.finish
     };
@@ -67,11 +70,11 @@ app.put('/newTask', function(req, res) {
 //});
 
 // delete a particular post
-app.post('/editTask/:id', function(req, res) {
-    selPost = _.find(myPosts, function(itemPost){return itemPost.id == req.params.id});
-    var postIndex = myPosts.indexOf(selPost);
-    myPosts.splice(postIndex, 1);
-    res.json(true);
+app.post('/editTask', function(req, res) {
+    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
+        var taskIndex = myTasks.indexOf(selTask);
+        myTasks[taskIndex].finish = req.body.finish;
+        res.json(true);
 });
 
 app.delete('/deleteFinish', function(req, res) {

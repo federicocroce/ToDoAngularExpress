@@ -6,8 +6,10 @@
     <span>{{remaining()}} de {{tasks.length}}</span> [ <a class="text-danger" href="" ng-click="deleteFinish()">Delete Select</a>] [ <a class="text-danger" href="" ng-click="deleteAll()">Delete All</a>]
     <ul class="unstyled">
         <li ng-repeat="task in tasks">
-            <input type="checkbox" ng-model="task.finish">
-            <span class="finish-{{task.finish}}">{{task.name}}</span>
+
+                <input type="checkbox" ng-model="task.finish" ng-change="change(task)">
+                <span class="finish-{{task.finish}}">{{task.name}}</span>
+
         </li>
     </ul>
     <form ng-submit="addTask()">

@@ -25,9 +25,9 @@ app.service('taskService', function ($http, $location) {
         };
 //
 //        //update blogItem matching by id
-//        this.update = function (blogItemId, blogItem) {
-//            return $http.post('/editPost', blogItem);
-//        };
+        this.updateTaskState = function (task) {
+            return $http.post('/editTask', task);
+        };
 //
         //remove blogItem matching by id
         this.deleteFinish = function () {
