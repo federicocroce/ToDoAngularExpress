@@ -80,11 +80,22 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     }
 
     $scope.deleteFinish = function () {
-        var oldTasks = $scope.tasks;
-        $scope.tasks = [];
-        angular.forEach(oldTasks, function (task) {
-            if (!task.finish) $scope.tasks.push(task);
-        });
+//        var oldTasks = [];
+//
+//        angular.forEach(oldTasks, function (task) {
+//            if (task.finish) oldTasks.push(task);
+//        });
+
+        taskService.deleteFinish()
+            .success(function (current, status, headers, config) {
+            $scope.getAll();
+//                  $location.path("/posts");
+//                toaster.pop('success', "Post saved successfully!");
+        })
+            .error(function(current, status, headers, config) {
+                $scope.getAll();
+//                toaster.pop('error', current);
+            });
     };
 
     $scope.deleteAll = function () {

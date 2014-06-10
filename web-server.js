@@ -67,11 +67,24 @@ app.put('/newTask', function(req, res) {
 //});
 
 // delete a particular post
-app.delete('/delete/:id', function(req, res) {
+app.post('/editTask/:id', function(req, res) {
     selPost = _.find(myPosts, function(itemPost){return itemPost.id == req.params.id});
     var postIndex = myPosts.indexOf(selPost);
     myPosts.splice(postIndex, 1);
     res.json(true);
+});
+
+app.delete('/deleteFinish', function(req, res) {
+
+    var oldTasks = myTasks;
+    myTasks = [];
+//    var c = 0;
+
+    _.each(oldTasks,function (task) {
+        if (!task.finish) myTasks.push(task);
+    });
+
+
 });
 
 

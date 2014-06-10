@@ -30,8 +30,8 @@ app.service('taskService', function ($http, $location) {
 //        };
 //
         //remove blogItem matching by id
-        this.remove = function (blogItemId) {
-            return $http.delete('/delete/'+blogItemId);
+        this.deleteFinish = function () {
+            return $http.delete('/deleteFinish');
             
         };
 }); 
