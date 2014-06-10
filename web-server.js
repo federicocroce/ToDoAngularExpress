@@ -50,7 +50,7 @@ app.put('/newTask', function(req, res) {
         name : req.body.name,
         finish : req.body.finish
     };
-    newTask.push(newTask);
+    myTasks.push(newTask);
     res.json(true);
 });
 

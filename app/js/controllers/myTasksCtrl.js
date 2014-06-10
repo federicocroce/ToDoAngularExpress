@@ -22,7 +22,8 @@ app.controller('myTasksCtrl', function($scope, taskService) {
         };
         taskService.create(taskData)
             .success(function (current, status, headers, config) {
-                  $location.path("/posts");
+                $scope.getAll();
+//                  $location.path("/posts");
 //                toaster.pop('success', "Post saved successfully!");
             })
             .error(function(current, status, headers, config) {
