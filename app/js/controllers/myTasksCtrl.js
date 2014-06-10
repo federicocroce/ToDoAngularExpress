@@ -15,21 +15,34 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 
     // Call to blogService.create()
     $scope.addTask = function() {
-        debugger;
-        var taskData = {
-            name : $scope.newTask,
-            finish : false
-        };
-        taskService.create(taskData)
-            .success(function (current, status, headers, config) {
-                $scope.getAll();
+        if ($scope.newTask !== '') {
+
+            var taskData = {
+                name : $scope.newTask,
+                finish : false
+            };
+            taskService.create(taskData)
+                .success(function (current, status, headers, config) {
+                    $scope.getAll();
 //                  $location.path("/posts");
 //                toaster.pop('success', "Post saved successfully!");
-            })
-            .error(function(current, status, headers, config) {
+                })
+                .error(function(current, status, headers, config) {
 //                toaster.pop('error', current);
-            });
+                });
+
+            $scope.newTask = '';
+
+        } else {
+            $scope.invalidTask = true;
+        }
     };
+
+    $scope.newTaskValue = function () {
+        if ($scope.newTask !== '')
+            $scope.invalidTask = false;
+    };
+
 
     //get single post
     $scope.getById = function() {
