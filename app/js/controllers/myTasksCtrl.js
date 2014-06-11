@@ -6,7 +6,9 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     $scope.getAll = function() {
         taskService.getAll()
             .success(function (data, status, headers, config) {
-                $scope.tasks = data;
+                debugger;
+                $scope.tasks = data.tasks;
+                $scope.remaining = data.count;
             })
             .error(function(data, status, headers, config) {
                 //toaster.pop('error', current);
@@ -74,25 +76,25 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 
         taskService.updateTaskState(task)
             .success(function (current, status, headers, config) {
-                $location.path("/posts/"+$scope.current.id);
-                toaster.pop('success', "Post updated successfully!");
+//                $location.path("/posts/"+$scope.current.id);
+                $scope.getAll();
             })
             .error(function(current, status, headers, config) {
 //                toaster.pop('error', current);
             });
     };
 
-    // removePost function
-    $scope.removePost = function () {
-        taskService.remove($scope.current.id)
-            .success(function (current, status, headers, config) {
-                $location.path("/posts/");
-//                toaster.pop('success', "Post removed successfully!");
-            })
-            .error(function(current, status, headers, config) {
-//                toaster.pop('error', current);
-            });
-    }
+//    // removePost function
+//    $scope.removePost = function () {
+//        taskService.remove($scope.current.id)
+//            .success(function (current, status, headers, config) {
+//                $location.path("/posts/");
+////                toaster.pop('success', "Post removed successfully!");
+//            })
+//            .error(function(current, status, headers, config) {
+////                toaster.pop('error', current);
+//            });
+//    }
 
     $scope.deleteFinish = function () {
 //        var oldTasks = [];
@@ -122,20 +124,20 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 //                toaster.pop('success', "Post saved successfully!");
             })
             .error(function(current, status, headers, config) {
-                  $scope.getAll();
+
 //                toaster.pop('error', current);
             });
-        $scope.getAll();
+
     };
 
-    $scope.remaining = function () {
-        var count = 0;
-
-        angular.forEach($scope.tasks, function (task) {
-            count += task.finish ? 0 : 1;
-        });
-        return count;
-    };
+//    $scope.remaining = function () {
+//        var count = 0;
+//
+//        angular.forEach($scope.tasks, function (task) {
+//            count += task.finish ? 0 : 1;
+//        });
+//        return count;
+//    };
 
 
     //call this method at first!

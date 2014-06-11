@@ -36,7 +36,19 @@ app.get("/", function(req, res) {
 
 // get all Tasks
 app.get('/api/myTasks', function(req, res){
-    res.send (myTasks) ;
+
+    var count = 0;
+
+    _.each(myTasks,function (task) {
+        if (!task.finish)  count ++;
+        });
+
+    var all = {
+        tasks: myTasks,
+        count : count
+    };
+
+    res.send (all);
 });
 
 
