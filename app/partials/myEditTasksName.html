@@ -1,0 +1,21 @@
+
+<div  class="toDo">
+
+    <h1 class="titleTask">List of task</h1>
+    <div>
+        <span class="taskCount"> {{remaining}} task to do  of {{tasks.length}}</span> [ <a class="text-danger" href="" ng-click="deleteFinish()">Delete Select</a>] [ <a class="text-danger" href="" ng-click="deleteAll()">Delete All</a>]
+        <ul class="unstyled">
+            <li class="taskOfList" ng-repeat="task in tasks">
+
+                <!--<input type="checkbox" ng-model="task.finish" ng-change="change(task)">-->
+                <span class="finish-{{task.finish}}">{{task.name}}</span> [ <a class="text-danger" href="" ng-click="editName(task)">Edit</a>]
+
+            </li>
+        </ul>
+        <form class="inputPos" ng-submit="editTask()">
+            <input class="invaldTask-{{invalidTask}}" type="texto" size="30" placeholder="Add Task" ng-model="newTaskName" ng-change="newTaskValue()">
+            <button class="btn btn-primary" type="submit">Acept</button>
+        </form>
+        <span class="text-danger" ng-show="invalidTask">Invalid task. Add Text.</span>
+    </div>
+</div>

@@ -15,6 +15,11 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'myTasksCtrl',
             templateUrl: 'partials/myTasks.html'
             })
+        .when('/myEditTasksName',
+        {
+            controller: 'myTasksEditNameCtrl',
+            templateUrl: 'partials/myEditTasksName.html'
+        })
         .when('/myAbout',
         {
             controller: '',

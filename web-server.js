@@ -89,6 +89,16 @@ app.post('/editTask', function(req, res) {
         res.json(true);
 });
 
+app.post('/editName', function(req, res) {
+    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
+    var taskIndex = myTasks.indexOf(selTask);
+    myTasks[taskIndex].name = req.body.name;
+    res.json(true);
+});
+
+
+
+
 //app.delete('/deleteFinish', function(req, res) {
 //
 //    var oldTasks = myTasks;
