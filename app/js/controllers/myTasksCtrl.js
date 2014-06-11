@@ -128,6 +128,16 @@ app.controller('myTasksCtrl', function($scope, taskService) {
         $scope.getAll();
     };
 
+    $scope.remaining = function () {
+        var count = 0;
+
+        angular.forEach($scope.tasks, function (task) {
+            count += task.finish ? 0 : 1;
+        });
+        return count;
+    };
+
+
     //call this method at first!
     $scope.getAll();
 });
