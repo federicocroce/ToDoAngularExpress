@@ -6,3 +6,20 @@
     background-color: rgb(180, 0, 0);
     color: #0031ff;
 }
+
+.backgroud-img-body{
+    background-image:url(../img/ToDo.jpg);
+}
+
+.positionCont{
+    margin-left: 50% ;
+    margin-top: 5%;
+}
+
+.taskCount{
+    font-family: Comic Sans MS;
+}
+
+.taskOfList{
+    margin-top: 10px;
+}

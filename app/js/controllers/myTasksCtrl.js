@@ -6,7 +6,6 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     $scope.getAll = function() {
         taskService.getAll()
             .success(function (data, status, headers, config) {
-                debugger;
                 $scope.tasks = data.tasks;
                 $scope.remaining = data.count;
             })

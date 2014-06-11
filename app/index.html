@@ -8,27 +8,32 @@
   <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
   <link rel="stylesheet" href="css/bootstrap.css"/>
   <link rel="stylesheet" href="css/bootstrap.min.css"/>
-//  <link rel="stylesheet" href="css/toaster.css"/>
+
 </head>
-<body>
-    <!-- navigation bar --> 
+<body class="backgroud-img-body">
+    <!-- navigation bar -->
+
+
     <nav class="navbar navbar-default navbar-inverse" role="navigation"> <!--definir un controller, agregar navigationController.js     $location.path("/post/1")-->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">TODO (demo)</a>
+            <a class="navbar-brand" href="#">Main</a>
+            <a class="navbar-brand" href="#/myTasks">ToDo</a>
+            <a class="navbar-brand" href="#/myAbout">About</a>
+
         </div>
-    </nav><!-- navigation bar --> 
-     
-    <!-- container -->
-    <div class="row">
-        <!-- right side -->
-        <div class="col-xs-12 col-md-8 right-side">
-            <!-- ng-view, HTML is injected dinamically -->
-                <div ng-view></div>
-        </div>    
-        <!-- bottom side -->
-        <div class="bottom-side">
-        </div>
-    </div> <!-- container -->
+    </nav><!-- navigation bar -->
+
+    <!--&lt;!&ndash; container &ndash;&gt;-->
+    <!--<div class="row">-->
+        <!--&lt;!&ndash; right side &ndash;&gt;-->
+        <!--<div class="col-xs-12 col-md-8 right-side">-->
+            <!--&lt;!&ndash; ng-view, HTML is injected dinamically &ndash;&gt;-->
+        <div class="positionCont" ng-view > </div>
+    <!--</div>-->
+    <!--<!-- bottom side -->
+        <!--<div class="bottom-side">-->
+        <!--</div>-->
+    <!--</div> <!-- container -->
     
     <!-- scripts -->
     <script src="lib/angular/angular.js"></script>
