@@ -73,21 +73,31 @@ app.put('/newTask', function(req, res) {
 app.post('/editTask', function(req, res) {
     selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
         var taskIndex = myTasks.indexOf(selTask);
-        myTasks[taskIndex].finish = !req.body.finish;
+        myTasks[taskIndex].finish = req.body.finish;
         res.json(true);
 });
 
+//app.delete('/deleteFinish', function(req, res) {
+//
+//    var oldTasks = myTasks;
+//    myTasks = [];
+////    var c = 0;
+//
+//    _.each(oldTasks,function (task) {
+//        if (!task.finish) myTasks.push(task);
+//    });
+//});
+
 app.delete('/deleteFinish', function(req, res) {
 
-    var oldTasks = myTasks;
-    myTasks = [];
+//    var oldTasks = myTasks;
+//    myTasks = [];
 //    var c = 0;
 
-    _.each(oldTasks,function (task) {
-        if (!task.finish) myTasks.push(task);
+    _.each(myTasks,function (task) {
+        if (task.finish) myTasks.splice(myTasks.indexOf(task),1);
     });
-
-
+    res.json(true);
 });
 
 
