@@ -3,13 +3,11 @@ app.controller('myTasksEditNameCtrl', function($scope, taskService) {
 
 $scope.currentTask;
 
+
     $scope.editName = function (task) {
         $scope.newTaskName = task.name;
         $scope.currentTask = task;
     }
-
-
-
 
     //get all elements
     $scope.getAll = function() {
@@ -27,7 +25,7 @@ $scope.currentTask;
     $scope.editTask = function() {
         if ($scope.newTaskName !== '') {
             $scope.currentTask.name = $scope.newTaskName;
-debugger;
+            $scope.newTaskName = "";
             taskService.editName($scope.currentTask)
                 .success(function (current, status, headers, config) {
                     $scope.getAll();
@@ -49,10 +47,6 @@ debugger;
         if ($scope.newTask !== '')
             $scope.invalidTask = false;
     };
-
-
-
-
 
 //    //get single post
 //    $scope.getById = function() {

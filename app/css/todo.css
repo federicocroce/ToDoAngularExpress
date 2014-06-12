@@ -7,7 +7,7 @@ body{
     color: grey;
 }
 .invaldTask-true {
-    background-color: rgb(180, 0, 0);
+    background-color: rgba(255, 0, 0, 0.54);
     color: #0031ff;
 }
 
@@ -42,10 +42,21 @@ body{
 }
 
 .inputPos{
-    margin-left: 18%;
+    margin-left: 12%;
+    margin-top: 3%;
 }
 
 .titleTask{
     font-family: Comic Sans MS;
     text-align: center;
+}
+
+.btnCancel {
+    background-color: rgba(248, 0, 0, 0.55);
+    color: white;
+}
+
+.btnAccept {
+    background-color: rgba(0, 26, 176, 0.75);
+    color: white;
 }

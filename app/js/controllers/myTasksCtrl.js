@@ -2,6 +2,9 @@
 
 app.controller('myTasksCtrl', function($scope, taskService) {
 
+
+    $scope.newTask = "";
+
     //get all elements
     $scope.getAll = function() {
         taskService.getAll()

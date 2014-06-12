@@ -99,33 +99,37 @@ app.post('/editName', function(req, res) {
 
 
 
-//app.delete('/deleteFinish', function(req, res) {
-//
-//    var oldTasks = myTasks;
-//    myTasks = [];
-////    var c = 0;
-//
-//    _.each(oldTasks,function (task) {
-//        if (!task.finish) myTasks.push(task);
-//    });
-//});
-
 app.delete('/deleteFinish', function(req, res) {
 
 //    var oldTasks = myTasks;
 //    myTasks = [];
-//    var c = 0;
 
-    _.each(myTasks,function (task) {
-        if (task.finish) myTasks.splice(myTasks.indexOf(task),1);
-    });
+    var oldTasks  = _.where(myTasks,  {finish: false})
+    myTasks = oldTasks;
+//    _.each(oldTasks,function (task) {
+//        if (!task.finish) myTasks.push(task);
+//    });
     res.json(true);
 });
+
+
+//app.delete('/deleteFinish', function(req, res) {
+//
+//    var oldTasks = myTasks;
+//    myTasks = [];
+//
+//    _.each(oldTasks,function (task) {
+//        if (!task.finish) myTasks.push(task);
+//    });
+//    res.json(true);
+//});
+
 
 
 // delete all
 app.delete('/clearTask', function(req, res) {
     myTasks = [];
+    res.json(true);
 });
 
 
