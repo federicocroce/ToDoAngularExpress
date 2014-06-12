@@ -60,3 +60,9 @@ body{
     background-color: rgba(0, 26, 176, 0.75);
     color: white;
 }
+
+.textAbout{
+    font-family: Comic Sans MS;
+    text-align: center;
+    font-size: 46px;
+}
