@@ -25,12 +25,14 @@ app.service('taskService', function ($http, $location) {
         };
 //
 //        //update blogItem matching by id
-        this.updateTaskState = function (task) {
-            return $http.post('/editTask', task);
+        this.updateTaskState = function (taskId) {
+            return $http.post('/editTaskState/'+taskId);
         };
 
+
+
     this.editName = function (task) {
-        return $http.post('/editName', task);
+        return $http.post('/editTaskName', task);
     };
 //
 

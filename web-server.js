@@ -15,7 +15,7 @@ var _ = require("underscore");
 //    finish: false
 //}];
 
-var count = 0;
+
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
@@ -48,7 +48,6 @@ db.on('error', console.error);
 db.once('open', function() {
     // Schema
     var taskSchema = new mongoose.Schema({
-        id: Number,
         name: { type: String },
         finish:  { type: Boolean}
     });
@@ -57,38 +56,40 @@ db.once('open', function() {
 
     // examples ____________________________________________________________________________________________
 
-    var task_example1 = new Tasks({
-        id: 0,
-        name: 'Algo',
-        finish: false
-    });
-
-    var task_example2 = new Tasks({
-        id: 1,
-        name: 'Algo1',
-        finish:  true
-    });
-
-//    var contID = 2;
-
-    task_example1.save();
-    task_example2.save();
+//    var task_example1 = new Tasks({
+//        id: 0,
+//        name: 'Algo',
+//        finish: false
+//    });
+//
+//    var task_example2 = new Tasks({
+//        id: 1,
+//        name: 'Algo1',
+//        finish:  true
+//    });
+//
+////    var contID = 2;
+//
+//    task_example1.save();
+//    task_example2.save();
 
     // _____________________________________________________________________________________________________
 //    var cont = myTasks.length;
+
+
+    var count = 0;
+    var AllTasks = [];
+
 
 // get all Tasks
 app.get('/api/myTasks', function(req, res){
     Tasks.find(function(err, myTasks) {
         if (err) return console.error(err);
 
-//        res.send (myTasks);
-//    _.each(myTasks,function (task) {
-//        if (!task.finish)  count ++;
-//        });
-
+        AllTasks = myTasks;
         var tasksToDo  = _.where(myTasks,  {finish: false})
         count = tasksToDo.length;
+
     var tasksAndCount = {
         tasks: myTasks,
         count : count
@@ -122,7 +123,6 @@ app.get('/api/myTasks', function(req, res){
 // create a new Task.   Preguntar id, texto hecho.   que hace res.json?
 app.put('/newTask', function(req, res) {
     var newTask = new Tasks({
-        id: count ++,
         name : req.body.name,
         finish : req.body.finish
     });
@@ -132,48 +132,36 @@ app.put('/newTask', function(req, res) {
 });
 
 
+
 // delete a particular post
-app.post('/editTask', function(req, res) {
-    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
-        var taskIndex = myTasks.indexOf(selTask);
-        myTasks[taskIndex].finish = req.body.finish;
+app.post('/editTaskState/:_id', function(req, res) {
+
+    Tasks.findOne({ _id: req.params._id }, function (err, task){
+        task.finish = !req.body.finish;
+        task.save();
+    });
+    res.json(true);
+});
+
+
+
+    app.post('/editTaskName', function(req, res) {
+        Tasks.findOne({ _id: req.body._id }, function (err, task){
+            task.name = req.body.name;
+            task.save();
+        });
         res.json(true);
 });
 
-app.post('/editName', function(req, res) {
-    selTask= _.find(myTasks, function(itemTask){return itemTask.id == req.body.id});
-    var taskIndex = myTasks.indexOf(selTask);
-    myTasks[taskIndex].name = req.body.name;
-    res.json(true);
+
+    app.delete('/deleteFinish', function(req, res) {
+
+        Tasks.remove({finish: true}, function (err) {
+            if (err) return handleError(err);
+            // removed!
+            res.json(true);
+        });
 });
-
-
-
-
-app.delete('/deleteFinish', function(req, res) {
-
-//    var oldTasks = myTasks;
-//    myTasks = [];
-
-    var oldTasks  = _.where(myTasks,  {finish: false})
-    myTasks = oldTasks;
-//    _.each(oldTasks,function (task) {
-//        if (!task.finish) myTasks.push(task);
-//    });
-    res.json(true);
-});
-
-
-//app.delete('/deleteFinish', function(req, res) {
-//
-//    var oldTasks = myTasks;
-//    myTasks = [];
-//
-//    _.each(oldTasks,function (task) {
-//        if (!task.finish) myTasks.push(task);
-//    });
-//    res.json(true);
-//});
 
 
 
@@ -185,10 +173,7 @@ app.delete('/clearTask', function(req, res) {
         // removed!
         res.json(true);
     });
-//
-//
-//    myTasks = [];
-//    res.json(true);
+
 });
 
 });

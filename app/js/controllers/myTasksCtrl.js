@@ -9,7 +9,6 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     $scope.getAll = function() {
         taskService.getAll()
             .success(function (data, status, headers, config) {
-                debugger;
                 $scope.tasks = data.tasks;
                 $scope.remaining = data.count;
             })
@@ -49,9 +48,6 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     };
 
 
-
-
-
 //    //get single post
 //    $scope.getById = function() {
 //        taskService.getById($routeParams.postId)
@@ -76,8 +72,8 @@ app.controller('myTasksCtrl', function($scope, taskService) {
 //            id : task.id,
 //            finish : task.finish
 //        };
-
-        taskService.updateTaskState(task)
+debugger;
+        taskService.updateTaskState(task._id)
             .success(function (current, status, headers, config) {
 //                $location.path("/posts/"+$scope.current.id);
                 $scope.getAll();
