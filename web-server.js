@@ -179,8 +179,16 @@ app.delete('/deleteFinish', function(req, res) {
 
 // delete all
 app.delete('/clearTask', function(req, res) {
-    myTasks = [];
-    res.json(true);
+
+    Tasks.remove({}, function (err) {
+        if (err) return handleError(err);
+        // removed!
+        res.json(true);
+    });
+//
+//
+//    myTasks = [];
+//    res.json(true);
 });
 
 });
