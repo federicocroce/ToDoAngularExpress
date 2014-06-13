@@ -15,7 +15,7 @@ var _ = require("underscore");
 //    finish: false
 //}];
 
-
+var count = 0;
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
@@ -53,23 +53,23 @@ db.once('open', function() {
         finish:  { type: Boolean}
     });
     // Mongoose also creates a MongoDB collection called 'Tasks' for these documents.
-    var singleTask = mongoose.model('singleTask', taskSchema);
+    var Tasks = mongoose.model('Tasks', taskSchema);
 
     // examples ____________________________________________________________________________________________
 
-    var task_example1 = new singleTask({
+    var task_example1 = new Tasks({
         id: 0,
         name: 'Algo',
         finish: false
     });
 
-    var task_example2 = new singleTask({
+    var task_example2 = new Tasks({
         id: 1,
         name: 'Algo1',
         finish:  true
     });
 
-    var contID = 2;
+//    var contID = 2;
 
     task_example1.save();
     task_example2.save();
@@ -79,10 +79,22 @@ db.once('open', function() {
 
 // get all Tasks
 app.get('/api/myTasks', function(req, res){
-    singleTask.find(function(err, myTasks) {
+    Tasks.find(function(err, myTasks) {
         if (err) return console.error(err);
-        res.send (myTasks);
-    });
+
+//        res.send (myTasks);
+//    _.each(myTasks,function (task) {
+//        if (!task.finish)  count ++;
+//        });
+
+        var tasksToDo  = _.where(myTasks,  {finish: false})
+        count = tasksToDo.length;
+    var tasksAndCount = {
+        tasks: myTasks,
+        count : count
+    };
+        res.send (tasksAndCount);
+   });
 });
 
 
@@ -109,12 +121,13 @@ app.get('/api/myTasks', function(req, res){
 
 // create a new Task.   Preguntar id, texto hecho.   que hace res.json?
 app.put('/newTask', function(req, res) {
-    var newTask = {
-        id: cont ++,
+    var newTask = new Tasks({
+        id: count ++,
         name : req.body.name,
         finish : req.body.finish
-    };
-    myTasks.push(newTask);
+    });
+
+    newTask.save();
     res.json(true);
 });
 
@@ -171,5 +184,5 @@ app.delete('/clearTask', function(req, res) {
 });
 
 });
-mongoose.connect('mongodb://localhost/test');
-console.log("Conectado a Mongo");
+
+mongoose.connect('mongodb://localhost/todo');
