@@ -9,8 +9,9 @@ app.controller('myTasksCtrl', function($scope, taskService) {
     $scope.getAll = function() {
         taskService.getAll()
             .success(function (data, status, headers, config) {
-                $scope.tasks = data.tasks;
-                $scope.remaining = data.count;
+                debugger;
+                $scope.tasks = data;
+//                $scope.remaining = data.count;
             })
             .error(function(data, status, headers, config) {
                 //toaster.pop('error', current);
